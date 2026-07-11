@@ -72,7 +72,7 @@
         </div>
     </header>
 
-    <!-- Героическая секция Лаборатории -->
+    <!-- Героическая секция Лаборатории с интерактивным фоном -->
     <section id="about" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03)_0%,transparent_70%)]"></div>
         <canvas id="hero-particles" class="absolute inset-0 z-0 pointer-events-none opacity-50"></canvas>
@@ -125,7 +125,7 @@
     </section>
 
     <!-- Секция Книги DOTS / Монографии -->
-    <section id="monograph" class="py-32 px-6 bg-[#070707] border-t border-zinc-900 reveal">
+    <section id="monograph" class="py-16 sm:py-24 px-6 bg-[#070707] border-t border-zinc-900 reveal">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-5 flex justify-center">
                 <div class="w-72 h-96 bg-zinc-900 border-2 border-zinc-700 rounded shadow-2xl relative p-6 flex flex-col justify-between neon-glow-cyan">
@@ -147,7 +147,7 @@
                     Фундаментальный нон-фикшн и академическая монография, описывающая природный элементный чертёж. Книга подробно раскрывает механизмы влияния структурированных минеральных комплексов на нервную систему, биохимический баланс сред и эволюционную адаптацию человека в условиях современной антропогенной нагрузки.
                 </p>
                 <div class="pt-4">
-                    <button onclick="openEmailModal('Запрос монографии DOTS')" class="px-6 py-3 bg-zinc-100 text-black hover:bg-zinc-200 font-mono text-xs uppercase tracking-wider font-bold rounded-sm transition cursor-pointer shadow-xl">
+                    <button onclick="openEmailModal('Запрос монографии DOTS')" class="px-6 py-3 bg-zinc-100 text-black hover:bg-zinc-200 font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer shadow-xl">
                         📖 Получить монографию (PDF)
                     </button>
                 </div>
@@ -156,7 +156,7 @@
     </section>
 
     <!-- Секция Диссертаций и Научных Статей -->
-    <section id="papers" class="py-32 px-6 max-w-7xl mx-auto border-t border-zinc-900">
+    <section id="papers" class="py-16 sm:py-24 px-6 max-w-7xl mx-auto border-t border-zinc-900">
         <div class="mb-16 reveal">
             <p class="text-xs font-mono tracking-[0.3em] text-cyan-400 uppercase mb-3">// SCIENTIFIC ARCHIVE</p>
             <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight text-white">Диссертационные Работы и Публикации</h2>
@@ -252,8 +252,8 @@
         </div>
     </section>
 
-    <!-- Блок: Центрированная 3D Модель НАВЕРХУ, Текст по центру СНИЗУ -->
-    <section id="product-transit" class="py-24 px-4 sm:px-6 bg-gradient-to-b from-[#030303] to-[#070b11] border-t border-zinc-900 relative overflow-hidden reveal">
+    <!-- БЛОК: Центрированная 3D Модель НАВЕРХУ, Текст по центру СНИЗУ -->
+    <section id="product-transit" class="py-12 sm:py-24 px-4 sm:px-6 bg-gradient-to-b from-[#030303] to-[#070b11] border-t border-zinc-900 relative overflow-hidden reveal">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.04)_0%,transparent_60%)]"></div>
         
         <div class="max-w-4xl mx-auto neon-glow-product p-6 sm:p-12 lg:p-16 bg-zinc-950/90 border border-zinc-900 rounded-sm backdrop-blur-sm flex flex-col items-center justify-center space-y-10">
@@ -312,7 +312,7 @@
         © 2026 DOTS LABORATORY. INTERNATIONAL RESEARCH CENTER FOR COMPLEX SYSTEMS. ALL RIGHTS RESERVED.
     </footer>
 
-    <!-- Премиальное Модальное Окно -->
+    <!-- Премиальное Модальное Окно ввода Email и отправки писем -->
     <div id="email-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeEmailModal()">
         <div class="bg-zinc-950 border border-zinc-800 p-6 sm:p-8 max-w-md w-full rounded-sm neon-glow-cyan relative space-y-4" onclick="event.stopPropagation()">
             <button onclick="closeEmailModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white font-mono text-xl cursor-pointer transition">&times;</button>
@@ -324,6 +324,7 @@
                     Укажите ваш электронный адрес. Система автоматически вышлет PDF-версию фундаментальной монографии DOTS на указанный почтовый ящик.
                 </p>
                 
+                <!-- ФОРМА ОТПРАВКИ НА ПОЧТУ -->
                 <form id="science-request-form" action="https://formsubmit.co/KovalevAlchemica@proton.me" method="POST" class="space-y-4">
                     <input type="hidden" name="_subject" id="form-email-subject" value="Новый запрос монографии DOTS">
                     <input type="hidden" name="_captcha" value="false">
@@ -579,7 +580,7 @@
                             <div class="text-4xl text-red-500">✕</div>
                             <h3 class="text-lg font-bold uppercase text-white">Произошла ошибка</h3>
                             <p class="text-zinc-400 text-xs font-light">Не удалось отправить форму. Проверьте корректность e-mail или повторите попытку позже.</p>
-                            <button onclick="closeEmailModal()" class="mt-4 px-6 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer">Закрыть</button>
+                            <button onclick="closeEmailModal()" class="mt-4 px-6 py-2 bg-zinc-900 border border-zinc-800 text-white font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer">Закрыть</button>
                         </div>
                     `;
                 });
