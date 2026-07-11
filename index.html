@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOTS Laboratory | Международный Научно-Исследовательский Центр</title>
+    
+    <!-- Open Graph мета-теги для красивого шеринга в мессенджерах -->
+    <meta property="og:title" content="DOTS Laboratory | Центр Комплексных Систем">
+    <meta property="og:description" content="Фундаментальные исследования в области направленной самоорганизации сред, Раман-спектроскопия и биоэлектрические минеральные матрицы.">
+    <meta property="og:type" content="website">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=200;300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030303;
+            color: #f5f5f5;
+        }
+        .neon-glow-cyan {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.1);
+        }
+        .science-card:hover {
+            box-shadow: 0 0 35px rgba(6, 182, 212, 0.15);
+            border-color: rgba(6, 182, 212, 0.4);
+            transform: translateY(-2px);
+        }
+        .neon-glow-product {
+            box-shadow: 0 0 55px rgba(6, 182, 212, 0.12);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+
+    <!-- Индикатор прогресса чтения -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 z-[60] w-0 transition-all duration-75"></div>
+
+    <!-- Унифицированный Хедер -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#030303]/80 backdrop-blur-lg border-b border-zinc-900/80">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl font-black tracking-widest bg-gradient-to-r from-white to-zinc-600 bg-clip-text text-transparent">CRL</span>
+                <span class="text-[10px] tracking-widest text-cyan-400 font-mono border border-cyan-500/20 px-2.5 py-0.5 rounded bg-cyan-950/20">LABORATORY</span>
+            </div>
+            <nav class="hidden lg:flex space-x-8 text-xs uppercase tracking-widest font-semibold text-zinc-400">
+                <a href="#about" class="hover:text-white transition">О Центре</a>
+                <a href="#monograph" class="hover:text-white transition">Монография DOTS</a>
+                <a href="#papers" class="hover:text-white transition">Исследования & Диссертации</a>
+                <a href="https://mineralkovaleva.github.io/Synergy/" target="_blank" class="text-cyan-400 hover:text-cyan-300 transition">💎 Продукт</a>
+                <a href="https://mineralkovaleva.github.io/Business-/" target="_blank" class="text-purple-400 hover:text-purple-300 transition">💼 Бизнес Программа</a>
+            </nav>
+            <div class="text-[11px] font-mono text-cyan-400 border border-cyan-500/20 bg-cyan-950/10 px-3 py-1.5 rounded-full">
+                Статус: <span class="font-bold uppercase animate-pulse">Open Science</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Героическая секция Лаборатории с интерактивным фоном -->
+    <section id="about" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03)_0%,transparent_70%)]"></div>
+        <canvas id="hero-particles" class="absolute inset-0 z-0 pointer-events-none opacity-50"></canvas>
+        
+        <div class="max-w-5xl mx-auto text-center relative z-10 space-y-8">
+            <div class="inline-block font-mono text-[10px] tracking-[0.4em] text-cyan-400 uppercase bg-cyan-950/20 border border-cyan-500/30 px-5 py-2 rounded-full">
+                INTERNATIONAL RESEARCH CENTER FOR COMPLEX SYSTEMS
+            </div>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase leading-none text-zinc-100">
+                Лаборатория DOTS <br>
+                <span class="bg-gradient-to-r from-cyan-400 via-blue-500 to-zinc-500 bg-clip-text text-transparent">Направленная Самоорганизация</span>
+            </h1>
+            <p class="text-zinc-400 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed">
+                Международный научно-исследовательский центр, изучающий фундаментальные законы организации сложных систем. 
+                Мы переводим квантовые и physical-химические свойства электромеханически кондиционированных сред в плоскость прикладного биохакинга и восстановления клеточного электрохимического баланса.
+            </p>
+            <div class="flex justify-center gap-4 pt-4">
+                <a href="#monograph" class="px-8 py-4 bg-zinc-100 text-black font-bold text-xs uppercase tracking-widest rounded-sm hover:bg-zinc-200 transition shadow-2xl">
+                    Изучить Труды Центра
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок Фундаментальных Векторов Исследований -->
+    <section class="py-24 px-6 max-w-7xl mx-auto border-t border-zinc-900 reveal">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-8 bg-zinc-950 border border-zinc-900 rounded-sm space-y-4">
+                <div class="text-cyan-400 font-mono text-xs">// FOCUS 01</div>
+                <h3 class="text-xl font-bold uppercase text-white">Электромеханическое Кондиционирование</h3>
+                <p class="text-zinc-400 text-sm font-light leading-relaxed">
+                    Изучение изменения структуры водно-минеральных систем под воздействием направленных полей для достижения максимальной biological доступности элементов.
+                </p>
+            </div>
+            <div class="p-8 bg-zinc-950 border border-zinc-900 rounded-sm space-y-4">
+                <div class="text-cyan-400 font-mono text-xs">// FOCUS 02</div>
+                <h3 class="text-xl font-bold uppercase text-white">Раман-Спектроскопия Матрицы</h3>
+                <p class="text-zinc-400 text-sm font-light leading-relaxed">
+                    Прецизионный молекулярный анализ жидких кристаллов и трассировка минеральных соединений, подтверждающие стабильность структуры Минерала Ковалёва.
+                </p>
+            </div>
+            <div class="p-8 bg-zinc-950 border border-zinc-900 rounded-sm space-y-4">
+                <div class="text-cyan-400 font-mono text-xs">// FOCUS 03</div>
+                <h3 class="text-xl font-bold uppercase text-white">Клеточная Электропроводимость</h3>
+                <p class="text-zinc-400 text-sm font-light leading-relaxed">
+                    Восстановление мембранного потенциала клетки и оптимизация процессов естественной гидратации как базовая защита от клеточного старения.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Книги DOTS / Монографии -->
+    <section id="monograph" class="py-32 px-6 bg-[#070707] border-t border-zinc-900 reveal">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="w-72 h-96 bg-zinc-900 border-2 border-zinc-700 rounded shadow-2xl relative p-6 flex flex-col justify-between neon-glow-cyan">
+                    <div class="space-y-4">
+                        <div class="text-[9px] font-mono text-cyan-400 tracking-widest uppercase">DOTS ACADEMIA PRESS</div>
+                        <div class="h-0.5 bg-gradient-to-r from-cyan-500 to-transparent w-16"></div>
+                        <h4 class="text-2xl font-black uppercase tracking-tight text-zinc-100">Фрактальные <br>Матрицы <br>Материи</h4>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] font-mono text-zinc-500">Научное издание центра направленной самоорганизации</p>
+                        <p class="text-xs font-bold text-zinc-400">В. Ковалёв</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-7 space-y-6">
+                <p class="text-xs font-mono tracking-widest text-cyan-400 uppercase">// ГЛАВНЫЙ НАУЧНЫЙ ТРУД</p>
+                <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight text-white">Книга DOTS: Архитектура Минеральной Матрицы</h2>
+                <p class="text-zinc-400 font-light leading-relaxed text-sm md:text-base">
+                    Фундаментальный нон-фикшн и академическая монография, описывающая природный элементный чертёж. Книга подробно раскрывает механизмы влияния структурированных минеральных комплексов на нервную систему, биохимический баланс сред и эволюционную адаптацию человека в условиях современной антропогенной нагрузки.
+                </p>
+                <div class="pt-4">
+                    <button onclick="openEmailModal('Запрос монографии DOTS')" class="px-6 py-3 bg-zinc-100 text-black hover:bg-zinc-200 font-mono text-xs uppercase tracking-wider font-bold rounded-sm transition cursor-pointer shadow-xl">
+                        📖 Получить монографию (PDF)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция Диссертаций и Научных Статей -->
+    <section id="papers" class="py-32 px-6 max-w-7xl mx-auto border-t border-zinc-900">
+        <div class="mb-16 reveal">
+            <p class="text-xs font-mono tracking-[0.3em] text-cyan-400 uppercase mb-3">// SCIENTIFIC ARCHIVE</p>
+            <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tight text-white">Диссертационные Работы и Публикации</h2>
+        </div>
+
+        <div class="grid lg:grid-cols-3 md:grid-cols-1 gap-8">
+            <!-- Работа 1 -->
+            <div class="bg-zinc-950 border border-zinc-900 p-8 flex flex-col justify-between science-card transition-all duration-300 rounded-sm reveal">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center font-mono text-[10px] text-zinc-500">
+                        <span>Greenwich University Research</span>
+                        <span>PhD Thesis Chapter I</span>
+                    </div>
+                    <h3 class="text-xl font-bold uppercase text-white tracking-tight">
+                        Характеристика электромеханически кондиционированных водно-минеральных систем
+                    </h3>
+                    <p class="text-zinc-400 text-xs font-light leading-relaxed">
+                        <strong class="text-zinc-300">Аннотация:</strong> Экспериментальное обоснование структурно-динамических изменений в жидких средах под воздействием направленных физических полей. Исследуется кинетика растворения, стабильность клатратных каркасов и ионная активность микроэлементов. 
+                    </p>
+                    <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
+                        «Применение Раман-спектроскопии позволило зафиксировать устойчивый сдвиг колебательных мод ОН-групп, что верифицирует изменение топологии водородных связей и долгоживущую поляризацию водно-минерального каркаса».
+                    </blockquote>
+                    <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10">
+                        Методология: Raman Spectroscopy, высокоразрешающая кондуктометрия.
+                    </div>
+                </div>
+                <div class="pt-6 mt-6 border-t border-zinc-900/60 flex justify-between items-center">
+                    <span class="text-xs font-mono text-zinc-600">Статус: Рецензировано</span>
+                    <button onclick="openEmailModal('Запрос Abstract: Глава I')" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
+                </div>
+            </div>
+
+            <!-- Работа 2 -->
+            <div class="bg-zinc-950 border border-zinc-900 p-8 flex flex-col justify-between science-card transition-all duration-300 rounded-sm reveal">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center font-mono text-[10px] text-zinc-500">
+                        <span>Dots Lab Open Data</span>
+                        <span>PhD Thesis Chapter II</span>
+                    </div>
+                    <h3 class="text-xl font-bold uppercase text-white tracking-tight">
+                        Биоэлектрическая проводимость и термодинамика клеточной гидратации
+                    </h3>
+                    <p class="text-zinc-400 text-xs font-light leading-relaxed">
+                        <strong class="text-zinc-300">Аннотация:</strong> Работа посвящена изучению механизмов трансмембранного переноса в условиях дефицита эссенциальных электролитов. Рассматривается влияние строго сбалансированных фракций трейс-минералов на градиент потенциала покоя клетки.
+                    </p>
+                    <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
+                        «Оптимизация клеточной гидратации напрямую детерминирована электрохимическим потенциалом среды. Интеграция точной минеральной матрицы восстанавливает проводимость мембран, снижая внутреннюю энтропию биологической системы».
+                    </blockquote>
+                    <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10">
+                        Ключевые параметры: Мембранный потенциал, гидратационные оболочки ионов.
+                    </div>
+                </div>
+                <div class="pt-6 mt-6 border-t border-zinc-900/60 flex justify-between items-center">
+                    <span class="text-xs font-mono text-zinc-600">Статус: В печати</span>
+                    <button onclick="openEmailModal('Запрос Abstract: Глава II')" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
+                </div>
+            </div>
+
+            <!-- Работа 3 -->
+            <div class="bg-zinc-950 border border-zinc-900 p-8 flex flex-col justify-between science-card transition-all duration-300 rounded-sm reveal">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center font-mono text-[10px] text-zinc-500">
+                        <span>Evolutionary Adaptation</span>
+                        <span>Monograph Materials</span>
+                    </div>
+                    <h3 class="text-xl font-bold uppercase text-white tracking-tight">
+                        Нейрорегуляция и системная адаптация под воздействием антропогенных стрессоров
+                    </h3>
+                    <p class="text-zinc-400 text-xs font-light leading-relaxed">
+                        <strong class="text-zinc-300">Аннотация:</strong> Анализ деградации естественных электромагнитных и биохимических условий обитания человека. Исследуется роль восполнения нативного минерального чертежа как эволюционного инструмента защиты высшей нервной деятельности.
+                    </p>
+                    <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
+                        «Восстановление регуляторных функций вегетативной нервной системы невозможно без стабилизации электролитного гомеостаза. Биомиметическая матрица выступает в роли буфера против когнитивного истощения».
+                    </blockquote>
+                    <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10/10">
+                        Область применения: Когнитивный биохакинг, эволюционная адаптация.
+                    </div>
+                </div>
+                <div class="pt-6 mt-6 border-t border-zinc-900/60 flex justify-between items-center">
+                    <span class="text-xs font-mono text-zinc-600">Статус: Публикация DOTS</span>
+                    <button onclick="openEmailModal('Запрос материалов: Нейрорегуляция')" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК: Транзит от Науки к Продукту (Минералу Ковалёва) -->
+    <section id="product-transit" class="py-24 px-4 sm:px-6 bg-gradient-to-b from-[#030303] to-[#090e15] border-t border-zinc-900 relative overflow-hidden reveal">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.06)_0%,transparent_60%)]"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8 neon-glow-product px-5 py-10 sm:p-16 bg-zinc-950/80 border border-zinc-800/60 rounded-sm backdrop-blur-sm">
+            <div class="inline-block font-mono text-[9px] tracking-[0.3em] text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-4 py-1.5 rounded">
+                FROM LAB TO LIFE // НАУЧНОЕ ВОПЛОЩЕНИЕ
+            </div>
+            
+            <div class="space-y-6">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+                    Материализация исследований: <br>
+                    <span class="bg-gradient-to-r from-cyan-400 via-cyan-200 to-blue-400 bg-clip-text text-transparent">Матрица Mineral Kovalev</span>
+                </h2>
+                <p class="text-zinc-200 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
+                    Все фундаментальные открытия Лаборатории DOTS в области направленной самоорганизации сложных систем, изученные методы кондиционирования сред и Раман-спектроскопия воплотились в одном конечном решении. 
+                </p>
+                <div class="w-12 h-px bg-zinc-800/80 mx-auto"></div>
+                <p class="text-zinc-400 text-xs sm:text-sm font-light max-w-2xl mx-auto leading-relaxed">
+                    Это точное воспроизведение природного элементного чертежа — не коммерческий БАД, а чистая биоэлектрическая матрица trace-минералов для восстановления энергетического потенциала и глубокой гидратации каждой клетки вашего организма.
+                </p>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="https://mineralkovaleva.github.io/Synergy/" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-bold text-xs uppercase tracking-widest rounded-sm hover:from-cyan-400 hover:to-blue-500 transition shadow-lg text-center transform active:translate-y-0.5">
+                    Перейти к Продукту & Матрице →
+                </a>
+                <a href="https://mineralkovaleva.github.io/Business-/" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 font-mono text-xs uppercase tracking-wider rounded-sm transition text-center transform active:translate-y-0.5">
+                    💼 Бизнес-программа CRM
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Кнопка скролла наверх -->
+    <button id="scroll-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="fixed bottom-6 right-6 z-40 bg-zinc-900/80 border border-zinc-800 text-zinc-400 hover:text-white p-3 rounded-full opacity-0 pointer-events-none transition-all duration-300 backdrop-blur-md cursor-pointer">
+        ▲
+    </button>
+
+    <!-- Подвал страницы -->
+    <footer class="border-t border-zinc-900 py-12 text-center text-[11px] font-mono text-zinc-600 bg-[#080c10]">
+        © 2026 DOTS LABORATORY. INTERNATIONAL RESEARCH CENTER FOR COMPLEX SYSTEMS. ALL RIGHTS RESERVED.
+    </footer>
+
+    <!-- Премиальное Модальное Окно ввода Email и отправки писем -->
+    <div id="email-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeEmailModal()">
+        <div class="bg-zinc-950 border border-zinc-800 p-6 sm:p-8 max-w-md w-full rounded-sm neon-glow-cyan relative space-y-4" onclick="event.stopPropagation()">
+            <button onclick="closeEmailModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white font-mono text-xl cursor-pointer transition">&times;</button>
+            
+            <div id="modal-status-area">
+                <div class="text-[9px] font-mono text-cyan-400 tracking-widest uppercase mb-2">// REQUEST GATEWAY</div>
+                <h3 class="text-xl font-bold uppercase text-white tracking-tight mb-2">Получить материалы</h3>
+                <p class="text-zinc-400 text-xs font-light leading-relaxed mb-4">
+                    Укажите ваш электронный адрес. Система автоматически вышлет PDF-документы и научные материалы на указанный почтовый ящик.
+                </p>
+                
+                <!-- ФОРМА ОТПРАВКИ НА ПОЧТУ -->
+                <form id="science-request-form" action="https://formsubmit.co/KovalevAlchemica@proton.me" method="POST" class="space-y-4">
+                    <input type="hidden" name="_subject" id="form-email-subject" value="Новый запрос материалов с сайта DOTS">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div>
+                        <label class="block text-[10px] font-mono uppercase text-zinc-500 mb-1">Ваш Email адрес:</label>
+                        <input type="email" name="email" required placeholder="name@domain.com" class="w-full bg-zinc-900 border border-zinc-800 focus:border-cyan-500 focus:outline-none text-white px-4 py-3 rounded-sm text-sm font-light transition">
+                    </div>
+                    
+                    <button type="submit" class="w-full px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-bold font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer text-center shadow-lg hover:from-cyan-400 hover:to-blue-500">
+                        Отправить запрос →
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Интерактивные Скрипты -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. Управление кнопкой скролла наверх
+            window.addEventListener('scroll', function() {
+                const btn = document.getElementById('scroll-to-top');
+                if (window.scrollY > 400) {
+                    btn.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    btn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            // 2. Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const progress = document.getElementById('scroll-progress');
+                const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                if (totalScroll > 0) {
+                    const percentage = (window.scrollY / totalScroll) * 100;
+                    progress.style.width = percentage + '%';
+                }
+            });
+
+            // 3. Анимация появления элементов при скролле (Reveal Observer)
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // 4. Интерактивная молекулярная сетка на Canvas
+            const canvas = document.getElementById('hero-particles');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let mouse = { x: null, y: null, radius: 120 };
+
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            window.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+            window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.radius = Math.random() * 1.5 + 1;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                    if (mouse.x != null && mouse.y != null) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let dist = Math.sqrt(dx*dx + dy*dy);
+                        if (dist < mouse.radius) {
+                            let force = (mouse.radius - dist) / mouse.radius;
+                            this.x -= (dx / dist) * force * 1.5;
+                            this.y -= (dy / dist) * force * 1.5;
+                        }
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(6, 182, 212, 0.35)';
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                let count = Math.min(60, Math.floor((canvas.width * canvas.height) / 16000));
+                for(let i=0; i<count; i++) particles.push(new Particle());
+            }
+            initParticles();
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                
+                for(let i=0; i<particles.length; i++) {
+                    for(let j=i+1; j<particles.length; j++) {
+                        let dx = particles[i].x - particles[j].x;
+                        let dy = particles[i].y - particles[j].y;
+                        let dist = Math.sqrt(dx*dx + dy*dy);
+                        if (dist < 110) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(6, 182, 212, ${0.12 * (1 - dist/110)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            // 5. AJAX обработка отправки формы без перезагрузки страницы
+            const form = document.getElementById('science-request-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const statusArea = document.getElementById('modal-status-area');
+                const formData = new FormData(form);
+
+                statusArea.innerHTML = `
+                    <div class="text-center py-8 space-y-4">
+                        <div class="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <p class="text-xs font-mono text-cyan-400 uppercase tracking-widest">Передача данных по шифрованному каналу...</p>
+                    </div>
+                `;
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        statusArea.innerHTML = `
+                            <div class="text-center py-6 space-y-4">
+                                <div class="text-4xl text-cyan-400">✓</div>
+                                <h3 class="text-lg font-bold uppercase text-white">Успешно отправлено!</h3>
+                                <p class="text-zinc-400 text-xs font-light leading-relaxed">
+                                    Материалы успешно зарезервированы. Проверьте вашу электронную почту в течение нескольких минут.
+                                </p>
+                                <button onclick="closeEmailModal()" class="mt-4 px-6 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer">Закрыть</button>
+                            </div>
+                        `;
+                    } else {
+                        throw new Error('Ошибка сети');
+                    }
+                })
+                .catch(error => {
+                    statusArea.innerHTML = `
+                        <div class="text-center py-6 space-y-4">
+                            <div class="text-4xl text-red-500">✕</div>
+                            <h3 class="text-lg font-bold uppercase text-white">Произошла ошибка</h3>
+                            <p class="text-zinc-400 text-xs font-light">Не удалось отправить форму. Проверьте корректность e-mail или повторите попытку позже.</p>
+                            <button onclick="closeEmailModal()" class="mt-4 px-6 py-2 bg-zinc-900 border border-zinc-800 text-white font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer">Закрыть</button>
+                        </div>
+                    `;
+                });
+            });
+        });
+
+        // 6. Логика открытия модального окна для почты
+        function openEmailModal(subjectText) {
+            const modal = document.getElementById('email-modal');
+            document.getElementById('form-email-subject').value = subjectText;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeEmailModal() {
+            const modal = document.getElementById('email-modal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                document.getElementById('modal-status-area').innerHTML = `
+                    <div class="text-[9px] font-mono text-cyan-400 tracking-widest uppercase mb-2">// REQUEST GATEWAY</div>
+                    <h3 class="text-xl font-bold uppercase text-white tracking-tight mb-2">Получить материалы</h3>
+                    <p class="text-zinc-400 text-xs font-light leading-relaxed mb-4">
+                        Укажите ваш электронный адрес. Система автоматически вышлет PDF-документы и научные материалы на указанный почтовый ящик.
+                    </p>
+                    <form id="science-request-form" action="https://formsubmit.co/KovalevAlchemica@proton.me" method="POST" class="space-y-4">
+                        <input type="hidden" name="_subject" id="form-email-subject" value="${document.getElementById('form-email-subject')?.value || 'Новый запрос'}">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <div>
+                            <label class="block text-[10px] font-mono uppercase text-zinc-500 mb-1">Ваш Email адрес:</label>
+                            <input type="email" name="email" required placeholder="name@domain.com" class="w-full bg-zinc-900 border border-zinc-800 focus:border-cyan-500 focus:outline-none text-white px-4 py-3 rounded-sm text-sm font-light transition">
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-bold font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer text-center shadow-lg">
+                            Отправить запрос →
+                        </button>
+                    </form>
+                `;
+            }, 300);
+        }
+    </script>
+</body>
+</html>
