@@ -11,6 +11,9 @@
     <meta property="og:type" content="website">
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Подключаем Three.js для 3D графики -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=200;300;400;600;700;900&display=swap" rel="stylesheet">
@@ -30,7 +33,7 @@
             transform: translateY(-2px);
         }
         .neon-glow-product {
-            box-shadow: 0 0 55px rgba(6, 182, 212, 0.12);
+            box-shadow: 0 0 55px rgba(6, 182, 212, 0.08);
         }
         .reveal {
             opacity: 0;
@@ -51,8 +54,9 @@
     <!-- Унифицированный Хедер -->
     <header class="fixed top-0 left-0 w-full z-50 bg-[#030303]/80 backdrop-blur-lg border-b border-zinc-900/80">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Исправленный логотип: DOTS вместо CRL -->
             <div class="flex items-center space-x-3">
-                <span class="text-2xl font-black tracking-widest bg-gradient-to-r from-white to-zinc-600 bg-clip-text text-transparent">CRL</span>
+                <span class="text-2xl font-black tracking-widest bg-gradient-to-r from-white to-zinc-600 bg-clip-text text-transparent">DOTS</span>
                 <span class="text-[10px] tracking-widest text-cyan-400 font-mono border border-cyan-500/20 px-2.5 py-0.5 rounded bg-cyan-950/20">LABORATORY</span>
             </div>
             <nav class="hidden lg:flex space-x-8 text-xs uppercase tracking-widest font-semibold text-zinc-400">
@@ -68,7 +72,7 @@
         </div>
     </header>
 
-    <!-- Героическая секция Лаборатории с интерактивным фоном -->
+    <!-- Героическая секция Лаборатории -->
     <section id="about" class="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-6 overflow-hidden">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03)_0%,transparent_70%)]"></div>
         <canvas id="hero-particles" class="absolute inset-0 z-0 pointer-events-none opacity-50"></canvas>
@@ -172,16 +176,19 @@
                     <p class="text-zinc-400 text-xs font-light leading-relaxed">
                         <strong class="text-zinc-300">Аннотация:</strong> Экспериментальное обоснование структурно-динамических изменений в жидких средах под воздействием направленных физических полей. Исследуется кинетика растворения, стабильность клатратных каркасов и ионная активность микроэлементов. 
                     </p>
-                    <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
-                        «Применение Раман-спектроскопии позволило зафиксировать устойчивый сдвиг колебательных мод ОН-групп, что верифицирует изменение топологии водородных связей и долгоживущую поляризацию водно-минерального каркаса».
-                    </blockquote>
-                    <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10">
-                        Методология: Raman Spectroscopy, высокоразрешающая кондуктометрия.
+                    
+                    <div id="abstract-ch1" class="hidden space-y-4 pt-4 border-t border-zinc-900/60 transition-all duration-300">
+                        <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
+                            «Применение Раман-спектроскопии позволило зафиксировать устойчивый сдвиг колебательных мод ОН-групп, что верифицирует изменение топологии водородных связей и долгоживущую поляризацию водно-минерального каркаса».
+                        </blockquote>
+                        <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10">
+                            Методология: Raman Spectroscopy, высокоразрешающая кондуктометрия.
+                        </div>
                     </div>
                 </div>
                 <div class="pt-6 mt-6 border-t border-zinc-900/60 flex justify-between items-center">
                     <span class="text-xs font-mono text-zinc-600">Статус: Рецензировано</span>
-                    <button onclick="openEmailModal('Запрос Abstract: Глава I')" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
+                    <button onclick="toggleAbstract('abstract-ch1', this)" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
                 </div>
             </div>
 
@@ -198,16 +205,19 @@
                     <p class="text-zinc-400 text-xs font-light leading-relaxed">
                         <strong class="text-zinc-300">Аннотация:</strong> Работа посвящена изучению механизмов трансмембранного переноса в условиях дефицита эссенциальных электролитов. Рассматривается влияние строго сбалансированных фракций трейс-минералов на градиент потенциала покоя клетки.
                     </p>
-                    <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
-                        «Оптимизация клеточной гидратации напрямую детерминирована электрохимическим потенциалом среды. Интеграция точной минеральной матрицы восстанавливает проводимость мембран, снижая внутреннюю энтропию биологической системы».
-                    </blockquote>
-                    <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10">
-                        Ключевые параметры: Мембранный потенциал, гидратационные оболочки ионов.
+                    
+                    <div id="abstract-ch2" class="hidden space-y-4 pt-4 border-t border-zinc-900/60 transition-all duration-300">
+                        <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
+                            «Оптимизация клеточной гидратации напрямую детерминирована электрохимическим потенциалом среды. Интеграция точной минеральной матрицы восстанавливает проводимость мембран, снижая внутреннюю энтропию биологической системы».
+                        </blockquote>
+                        <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10">
+                            Ключевые параметры: Мембранный потенциал, гидратационные оболочки ионов.
+                        </div>
                     </div>
                 </div>
                 <div class="pt-6 mt-6 border-t border-zinc-900/60 flex justify-between items-center">
                     <span class="text-xs font-mono text-zinc-600">Статус: В печати</span>
-                    <button onclick="openEmailModal('Запрос Abstract: Глава II')" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
+                    <button onclick="toggleAbstract('abstract-ch2', this)" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
                 </div>
             </div>
 
@@ -224,52 +234,71 @@
                     <p class="text-zinc-400 text-xs font-light leading-relaxed">
                         <strong class="text-zinc-300">Аннотация:</strong> Анализ деградации естественных электромагнитных и биохимических условий обитания человека. Исследуется роль восполнения нативного минерального чертежа как эволюционного инструмента защиты высшей нервной деятельности.
                     </p>
-                    <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
-                        «Восстановление регуляторных функций вегетативной нервной системы невозможно без стабилизации электролитного гомеостаза. Биомиметическая матрица выступает в роли буфера против когнитивного истощения».
-                    </blockquote>
-                    <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10/10">
-                        Область применения: Когнитивный биохакинг, эволюционная адаптация.
+                    
+                    <div id="abstract-ch3" class="hidden space-y-4 pt-4 border-t border-zinc-900/60 transition-all duration-300">
+                        <blockquote class="text-[11px] italic text-zinc-500 border-l border-cyan-500/40 pl-3 my-2">
+                            «Восстановление регуляторных функций вегетативной нервной системы невозможно без стабилизации электролитного гомеостаза. Биомиметическая матрица выступает в роли буфера против когнитивного истощения».
+                        </blockquote>
+                        <div class="text-[11px] font-mono text-cyan-400/80 bg-cyan-950/20 p-3 rounded border border-cyan-500/10">
+                            Область применения: Когнитивный биохакинг, evolutionary адаптация.
+                        </div>
                     </div>
                 </div>
                 <div class="pt-6 mt-6 border-t border-zinc-900/60 flex justify-between items-center">
                     <span class="text-xs font-mono text-zinc-600">Статус: Публикация DOTS</span>
-                    <button onclick="openEmailModal('Запрос материалов: Нейрорегуляция')" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
+                    <button onclick="toggleAbstract('abstract-ch3', this)" class="text-xs font-mono text-cyan-400 hover:underline cursor-pointer">Abstract →</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- БЛОК: Транзит от Науки к Продукту (Минералу Ковалёва) -->
-    <section id="product-transit" class="py-24 px-4 sm:px-6 bg-gradient-to-b from-[#030303] to-[#090e15] border-t border-zinc-900 relative overflow-hidden reveal">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.06)_0%,transparent_60%)]"></div>
+    <!-- Блок: Центрированная 3D Модель НАВЕРХУ, Текст по центру СНИЗУ -->
+    <section id="product-transit" class="py-24 px-4 sm:px-6 bg-gradient-to-b from-[#030303] to-[#070b11] border-t border-zinc-900 relative overflow-hidden reveal">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(6,182,212,0.04)_0%,transparent_60%)]"></div>
         
-        <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8 neon-glow-product px-5 py-10 sm:p-16 bg-zinc-950/80 border border-zinc-800/60 rounded-sm backdrop-blur-sm">
-            <div class="inline-block font-mono text-[9px] tracking-[0.3em] text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-4 py-1.5 rounded">
-                FROM LAB TO LIFE // НАУЧНОЕ ВОПЛОЩЕНИЕ
-            </div>
+        <div class="max-w-4xl mx-auto neon-glow-product p-6 sm:p-12 lg:p-16 bg-zinc-950/90 border border-zinc-900 rounded-sm backdrop-blur-sm flex flex-col items-center justify-center space-y-10">
             
-            <div class="space-y-6">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+            <!-- 1. Интерактивный 3D-холст — СВЕРХУ И ИДЕАЛЬНО ПО ЦЕНТРУ -->
+            <div class="w-full flex flex-col items-center justify-center relative">
+                <div class="w-full max-w-[350px] sm:max-w-[380px] h-[350px] sm:h-[380px] relative rounded-full bg-radial from-cyan-950/5 to-transparent flex items-center justify-center mx-auto overflow-hidden">
+                    <canvas id="platonic-3d-canvas" class="w-full h-full block mx-auto"></canvas>
+                </div>
+                <div class="text-center mt-4 font-mono text-[9px] text-cyan-500/50 tracking-widest uppercase">
+                    Интерактивная 3D-модель: 5 Платоновых Тел Матрицы
+                </div>
+            </div>
+
+            <!-- 2. Контентная текстовая часть — ИДЕАЛЬНО ПО ЦЕНТРУ -->
+            <div class="space-y-6 text-center max-w-3xl mx-auto flex flex-col items-center">
+                <div class="inline-block font-mono text-[9px] tracking-[0.3em] text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-4 py-1.5 rounded mx-auto">
+                    FROM LAB TO LIFE // НАУЧНОЕ ВОПЛОЩЕНИЕ
+                </div>
+                
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-white leading-tight text-center">
                     Материализация исследований: <br>
                     <span class="bg-gradient-to-r from-cyan-400 via-cyan-200 to-blue-400 bg-clip-text text-transparent">Матрица Mineral Kovalev</span>
                 </h2>
-                <p class="text-zinc-200 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
-                    Все фундаментальные открытия Лаборатории DOTS в области направленной самоорганизации сложных систем, изученные методы кондиционирования сред и Раман-спектроскопия воплотились в одном конечном решении. 
+                
+                <p class="text-zinc-300 text-sm md:text-base font-light leading-relaxed text-center max-w-2xl">
+                    Все фундаментальные открытия Лаборатории DOTS в области направленной самоорганизации сложных систем, изученные методы кондиционирования сред и Раман-спектроскопия воплотились in одном конечном решении. 
                 </p>
-                <div class="w-12 h-px bg-zinc-800/80 mx-auto"></div>
-                <p class="text-zinc-400 text-xs sm:text-sm font-light max-w-2xl mx-auto leading-relaxed">
+                
+                <div class="w-16 h-px bg-zinc-800 mx-auto"></div>
+                
+                <p class="text-zinc-400 text-xs sm:text-sm font-light leading-relaxed text-center max-w-2xl">
                     Это точное воспроизведение природного элементного чертежа — не коммерческий БАД, а чистая биоэлектрическая матрица trace-минералов для восстановления энергетического потенциала и глубокой гидратации каждой клетки вашего организма.
                 </p>
+
+                <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+                    <a href="https://mineralkovaleva.github.io/Synergy/" target="_blank" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-bold text-xs uppercase tracking-widest rounded-sm hover:from-cyan-400 hover:to-blue-500 transition shadow-lg text-center transform active:translate-y-0.5">
+                        Перейти к Продукту & Матрице →
+                    </a>
+                    <a href="https://mineralkovaleva.github.io/Business-/" target="_blank" class="px-8 py-4 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 font-mono text-xs uppercase tracking-wider rounded-sm transition text-center transform active:translate-y-0.5">
+                        💼 Бизнес-программа CRM
+                    </a>
+                </div>
             </div>
 
-            <div class="pt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="https://mineralkovaleva.github.io/Synergy/" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-bold text-xs uppercase tracking-widest rounded-sm hover:from-cyan-400 hover:to-blue-500 transition shadow-lg text-center transform active:translate-y-0.5">
-                    Перейти к Продукту & Матрице →
-                </a>
-                <a href="https://mineralkovaleva.github.io/Business-/" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 font-mono text-xs uppercase tracking-wider rounded-sm transition text-center transform active:translate-y-0.5">
-                    💼 Бизнес-программа CRM
-                </a>
-            </div>
         </div>
     </section>
 
@@ -283,21 +312,20 @@
         © 2026 DOTS LABORATORY. INTERNATIONAL RESEARCH CENTER FOR COMPLEX SYSTEMS. ALL RIGHTS RESERVED.
     </footer>
 
-    <!-- Премиальное Модальное Окно ввода Email и отправки писем -->
+    <!-- Премиальное Модальное Окно -->
     <div id="email-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 transition-opacity duration-300" onclick="closeEmailModal()">
         <div class="bg-zinc-950 border border-zinc-800 p-6 sm:p-8 max-w-md w-full rounded-sm neon-glow-cyan relative space-y-4" onclick="event.stopPropagation()">
             <button onclick="closeEmailModal()" class="absolute top-4 right-4 text-zinc-500 hover:text-white font-mono text-xl cursor-pointer transition">&times;</button>
             
             <div id="modal-status-area">
                 <div class="text-[9px] font-mono text-cyan-400 tracking-widest uppercase mb-2">// REQUEST GATEWAY</div>
-                <h3 class="text-xl font-bold uppercase text-white tracking-tight mb-2">Получить материалы</h3>
+                <h3 class="text-xl font-bold uppercase text-white tracking-tight mb-2">Получить монографию</h3>
                 <p class="text-zinc-400 text-xs font-light leading-relaxed mb-4">
-                    Укажите ваш электронный адрес. Система автоматически вышлет PDF-документы и научные материалы на указанный почтовый ящик.
+                    Укажите ваш электронный адрес. Система автоматически вышлет PDF-версию фундаментальной монографии DOTS на указанный почтовый ящик.
                 </p>
                 
-                <!-- ФОРМА ОТПРАВКИ НА ПОЧТУ -->
                 <form id="science-request-form" action="https://formsubmit.co/KovalevAlchemica@proton.me" method="POST" class="space-y-4">
-                    <input type="hidden" name="_subject" id="form-email-subject" value="Новый запрос материалов с сайта DOTS">
+                    <input type="hidden" name="_subject" id="form-email-subject" value="Новый запрос монографии DOTS">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
                     
@@ -316,8 +344,18 @@
 
     <!-- Интерактивные Скрипты -->
     <script>
+        function toggleAbstract(blockId, button) {
+            const block = document.getElementById(blockId);
+            if (block.classList.contains('hidden')) {
+                block.classList.remove('hidden');
+                button.textContent = 'Свернуть ←';
+            } else {
+                block.classList.add('hidden');
+                button.textContent = 'Abstract →';
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
-            // 1. Управление кнопкой скролла наверх
             window.addEventListener('scroll', function() {
                 const btn = document.getElementById('scroll-to-top');
                 if (window.scrollY > 400) {
@@ -327,7 +365,6 @@
                 }
             });
 
-            // 2. Scroll Progress Bar
             window.addEventListener('scroll', () => {
                 const progress = document.getElementById('scroll-progress');
                 const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -337,7 +374,6 @@
                 }
             });
 
-            // 3. Анимация появления элементов при скролле (Reveal Observer)
             const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -348,7 +384,7 @@
 
             document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-            // 4. Интерактивная молекулярная сетка на Canvas
+            // Фоновая 2D-сетка
             const canvas = document.getElementById('hero-particles');
             const ctx = canvas.getContext('2d');
             let particles = [];
@@ -411,7 +447,6 @@
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                
                 for(let i=0; i<particles.length; i++) {
                     for(let j=i+1; j<particles.length; j++) {
                         let dx = particles[i].x - particles[j].x;
@@ -431,7 +466,79 @@
             }
             animate();
 
-            // 5. AJAX обработка отправки формы без перезагрузки страницы
+            // ==========================================
+            // ИСПРАВЛЕННАЯ ЦЕНТРИРОВАННАЯ 3D ГЕОМЕТРИЯ (THREE.JS)
+            // ==========================================
+            (function init3DMatrix() {
+                const pCanvas = document.getElementById('platonic-3d-canvas');
+                if (!pCanvas) return;
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+                camera.position.z = 9.2;
+
+                const renderer = new THREE.WebGLRenderer({ canvas: pCanvas, alpha: true, antialias: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+                const matrixGroup = new THREE.Group();
+                scene.add(matrixGroup);
+
+                const shapesData = [
+                    { geo: new THREE.TetrahedronGeometry(1.0), color: 0xa855f7, speed: 0.008 }, 
+                    { geo: new THREE.BoxGeometry(1.3, 1.3, 1.3), color: 0x3b82f6, speed: -0.006 }, 
+                    { geo: new THREE.OctahedronGeometry(1.5), color: 0x06b6d4, speed: 0.005 },    
+                    { geo: new THREE.DodecahedronGeometry(1.8), color: 0x22d3ee, speed: -0.003 }, 
+                    { geo: new THREE.IcosahedronGeometry(2.2), color: 0x2dd4bf, speed: 0.002 }    
+                ];
+
+                const meshes = [];
+                shapesData.forEach(data => {
+                    const material = new THREE.MeshBasicMaterial({
+                        color: data.color,
+                        wireframe: true,
+                        transparent: true,
+                        opacity: 0.45
+                    });
+                    const mesh = new THREE.Mesh(data.geo, material);
+                    matrixGroup.add(mesh);
+                    meshes.push({ mesh: mesh, speed: data.speed });
+                });
+
+                let targetX = 0, targetY = 0;
+                window.addEventListener('mousemove', (e) => {
+                    targetX = (e.clientX - window.innerWidth / 2) * 0.0003;
+                    targetY = (e.clientY - window.innerHeight / 2) * 0.0003;
+                });
+
+                function render3D() {
+                    requestAnimationFrame(render3D);
+                    matrixGroup.rotation.y += (targetX - matrixGroup.rotation.y) * 0.05;
+                    matrixGroup.rotation.x += (targetY - matrixGroup.rotation.x) * 0.05;
+
+                    meshes.forEach((item, idx) => {
+                        item.mesh.rotation.y += item.speed;
+                        item.mesh.rotation.x += item.speed * 0.5;
+                        item.mesh.rotation.z += 0.001 * (idx + 1);
+                    });
+                    renderer.render(scene, camera);
+                }
+                render3D();
+
+                const resizeObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const width = entry.contentRect.width || pCanvas.parentElement.clientWidth;
+                        const size = Math.min(width, 380);
+                        if(size > 0) {
+                            renderer.setSize(size, size);
+                            camera.aspect = 1;
+                            camera.updateProjectionMatrix();
+                        }
+                    }
+                });
+                resizeObserver.observe(pCanvas.parentElement);
+            })();
+
+            // Форма отправки e-mail
             const form = document.getElementById('science-request-form');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -457,7 +564,7 @@
                                 <div class="text-4xl text-cyan-400">✓</div>
                                 <h3 class="text-lg font-bold uppercase text-white">Успешно отправлено!</h3>
                                 <p class="text-zinc-400 text-xs font-light leading-relaxed">
-                                    Материалы успешно зарезервированы. Проверьте вашу электронную почту в течение нескольких минут.
+                                    Ссылка зарезервирована. Проверьте вашу электронную почту в течение нескольких минут.
                                 </p>
                                 <button onclick="closeEmailModal()" class="mt-4 px-6 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer">Закрыть</button>
                             </div>
@@ -472,18 +579,16 @@
                             <div class="text-4xl text-red-500">✕</div>
                             <h3 class="text-lg font-bold uppercase text-white">Произошла ошибка</h3>
                             <p class="text-zinc-400 text-xs font-light">Не удалось отправить форму. Проверьте корректность e-mail или повторите попытку позже.</p>
-                            <button onclick="closeEmailModal()" class="mt-4 px-6 py-2 bg-zinc-900 border border-zinc-800 text-white font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer">Закрыть</button>
+                            <button onclick="closeEmailModal()" class="mt-4 px-6 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-white font-mono text-xs uppercase tracking-wider rounded-sm transition cursor-pointer">Закрыть</button>
                         </div>
                     `;
                 });
             });
         });
 
-        // 6. Логика открытия модального окна для почты
         function openEmailModal(subjectText) {
             const modal = document.getElementById('email-modal');
             document.getElementById('form-email-subject').value = subjectText;
-            
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             setTimeout(() => modal.classList.remove('opacity-0'), 10);
@@ -497,9 +602,9 @@
                 modal.classList.add('hidden');
                 document.getElementById('modal-status-area').innerHTML = `
                     <div class="text-[9px] font-mono text-cyan-400 tracking-widest uppercase mb-2">// REQUEST GATEWAY</div>
-                    <h3 class="text-xl font-bold uppercase text-white tracking-tight mb-2">Получить материалы</h3>
+                    <h3 class="text-xl font-bold uppercase text-white tracking-tight mb-2">Получить монографию</h3>
                     <p class="text-zinc-400 text-xs font-light leading-relaxed mb-4">
-                        Укажите ваш электронный адрес. Система автоматически вышлет PDF-документы и научные материалы на указанный почтовый ящик.
+                        Укажите ваш электронный адрес. Система автоматически вышлет PDF-версию фундаментальной монографии DOTS на указанный почтовый ящик.
                     </p>
                     <form id="science-request-form" action="https://formsubmit.co/KovalevAlchemica@proton.me" method="POST" class="space-y-4">
                         <input type="hidden" name="_subject" id="form-email-subject" value="${document.getElementById('form-email-subject')?.value || 'Новый запрос'}">
